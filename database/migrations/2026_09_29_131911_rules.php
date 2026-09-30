@@ -11,9 +11,10 @@ return new class extends Migration
         Schema::create('rules', function (Blueprint $table) {
             $table->id();
             $table->foreignId('category_id')->constrained('drones')->onDelete('cascade');
-            $table->string('package_name');
-            $table->string('price');
-            $table->int('battery_count');
+            $table->string('attribute');
+            $table->string('operator');
+            $table->int('value');
+            $table->int('score');
             $table->timestamps('created_at');
             $table->timestamps('updated_at');
         });

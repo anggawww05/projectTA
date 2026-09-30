@@ -12,8 +12,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('attribute');
-            $table->string('price');
-            $table->int('battery_count');
+            $table->string('type');
+            $table->integer('weight');
             $table->timestamps('created_at');
             $table->timestamps('updated_at');
         });
