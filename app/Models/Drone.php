@@ -22,10 +22,13 @@ class Drone extends Model
         'picture_profile',
         'acro_mode',
         'mode_360',
+        'package_name',
+        'price',
+        'battery_count',
     ];
 
-    public function packages()
+    public function dssresults()
     {
-        return $this->hasMany(DronePackage::class);
+        return $this->hasMany(DssResult::class);
     }
 }

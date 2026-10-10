@@ -27,6 +27,9 @@ return new class extends Migration
             $table->boolean('mode_360');
             $table->timestamps('created_at');
             $table->timestamps('updated_at');
+            $table->string('package_name');
+            $table->string('price');
+            $table->int('battery_count');
         });
     }
 

@@ -11,6 +11,10 @@ class Category extends Model
         'threshold',
     ];
 
+    // protected $casts = [
+    //     'threshold' => 'float',
+    // ];
+
     public function rules()
     {
         return $this->hasMany(Rule::class);
