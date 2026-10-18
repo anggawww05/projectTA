@@ -1,7 +1,7 @@
 import { Head } from '@inertiajs/react';
 import GuestLayout from '../../layouts/guestlayout';
 import HeroSection from '../../components/guest/home/herosection';;
-// import HeroSection from '../../components/guest/home/herosection';;
+import AboutSection from '../../components/guest/home/aboutsection';;
 // import HeroSection from '../../components/guest/home/herosection';;
 // import HeroSection from '../../components/guest/home/herosection';;
 
@@ -11,6 +11,7 @@ export default function Welcome() {
             <Head title="Beranda" />
 
             <HeroSection />
+            <AboutSection />
         </GuestLayout>
     );
 }
