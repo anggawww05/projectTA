@@ -2,8 +2,8 @@ import { Head } from '@inertiajs/react';
 import GuestLayout from '../../layouts/guestlayout';
 import HeroSection from '../../components/guest/home/herosection';;
 import AboutSection from '../../components/guest/home/aboutsection';;
-// import HeroSection from '../../components/guest/home/herosection';;
-// import HeroSection from '../../components/guest/home/herosection';;
+import DeveloperSection from '../../components/guest/home/developersection';;
+import ServiceSection from '../../components/guest/home/servicesection';;
 
 export default function Welcome() {
     return (
@@ -12,6 +12,8 @@ export default function Welcome() {
 
             <HeroSection />
             <AboutSection />
+            <DeveloperSection />
+            <ServiceSection />
         </GuestLayout>
     );
 }
