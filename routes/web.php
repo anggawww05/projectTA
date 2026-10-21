@@ -17,3 +17,15 @@ Route::get('/recommendation', function () {
     return Inertia::render('guest/recommendation');
 })->name('recommendation');
 
+Route::get('/faq', function () {
+    return Inertia::render('guest/faq');
+})->name('faq');
+
+Route::get('/recommendation/result', function () {
+    return Inertia::render('guest/result');
+})->name('result');
+
+Route::get('/recommendation/result/detail-product', function () {
+    return Inertia::render('guest/detailproduct');
+})->name('detail-product');
+

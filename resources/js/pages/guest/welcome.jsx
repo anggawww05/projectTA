@@ -8,8 +8,7 @@ import ServiceSection from '../../components/guest/home/servicesection';;
 export default function Welcome() {
     return (
         <GuestLayout>
-            <Head title="Beranda" />
-
+            <Head />
             <HeroSection />
             <AboutSection />
             <DeveloperSection />

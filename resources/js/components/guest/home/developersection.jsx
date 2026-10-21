@@ -8,14 +8,14 @@ export default function DeveloperSection() {
                 <HeadlineSection title="Tentang" highlight="Developer" />
 
                 <div className="mt-12 flex flex-col items-center md:flex-row gap-8">
-                    <div className="flex w-full bg-white rounded-2xl shadow-sm p-6 border border-[#e1e1e1]">
+                    <div className="flex w-full bg-white rounded-2xl shadow-sm p-6 border border-[#e1e1e1] transition-all duration-300 hover:-translate-y-2">
                         <div className="flex gap-6">
                             <Link href="/" className="">
                                 <img src="/images/gambar-tentangdev.png" alt="developer" className="h-full w-auto object-contain" />
                             </Link>
                             <div className="flex flex-col gap-2 my-auto">
                                 <div>
-                                    <h3 className="text-lg text-[#272727]">Nama Developer</h3>
+                                    <h3 className="text-lg text-[#272727]">Developer</h3>
                                     <h2 className="text-xl font-bold text-[#272727] text-justify">Anak Agung Gede Angga Putra Wibawa</h2>
                                 </div>
                                 <div>

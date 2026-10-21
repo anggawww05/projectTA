@@ -1,5 +1,5 @@
 import { Link, usePage } from '@inertiajs/react';
-import { useEffect, useState } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { Menu, X } from 'lucide-react';
 
 export default function Navbar() {
@@ -23,7 +23,45 @@ export default function Navbar() {
 
     const { url } = usePage();
     const pathname = url.split('?')[0];
-    // const [menuOpen, setMenuOpen] = useState(false);
+
+    const navRef = useRef(null);
+    const [indicator, setIndicator] = useState({
+        lef: 0,
+        width: 0,
+        visible: false,
+    });
+
+    useEffect(() => {
+        const updateIndicator = () => {
+            const container = navRef.current;
+            if (!container) return;
+
+            const activeLink = container.querySelector('[aria-current="page"]');
+
+            if (!activeLink) {
+                setIndicator((prev) => ({ ...prev, visible: false }));
+                return;
+            }
+
+            const text = activeLink.querySelector('span');
+            if (!text) return;
+
+            const containerRect = container.getBoundingClientRect();
+            const textRect = text.getBoundingClientRect();
+
+            setIndicator({
+                left: textRect.left - containerRect.left,
+                width: textRect.width,
+                visible: true,
+            });
+        };
+
+        updateIndicator();
+
+        window.addEventListener('resize', updateIndicator);
+
+        return () => window.removeEventListener('resize', updateIndicator);
+    }, [pathname]);
 
     const navigation = [
         { label: 'Beranda', href: '/' },
@@ -44,7 +82,7 @@ export default function Navbar() {
 
     return (
         <header className={`fixed top-0 left-0 z-50 w-full transition-[background-color,box-shadow] duration-500 ease-in-out
-            ${ isScrolled ? 'bg-white shadow-md' : 'bg-transparent shadow-none'}
+            ${isScrolled ? 'bg-white shadow-md' : 'bg-transparent shadow-none'}
             }`}
 
         >
@@ -53,19 +91,38 @@ export default function Navbar() {
                     <img src="/images/logo-warna.png" alt="Logo" className="h-7 w-auto object-contain" />
                 </Link>
 
-                <div className="hidden items-center gap-12 md:flex">
-                    {navigation.map((item) => (
-                        <Link
-                            key={item.label}
-                            href={item.href}
-                            className={`relative py-2 text-[16px] transition-colors ${isActive(item.href)
-                                    ? 'font-medium text-gray-900'
-                                    : 'text-gray-800 hover:text-[#19434A]'
-                                }`}
-                        >
-                            {item.label}
-                        </Link>
-                    ))}
+                <div
+                    ref={navRef}
+                    className="relative hidden items-center gap-12 md:flex"
+                >
+                    {navigation.map((item) => {
+                        const active = isActive(item.href);
+
+                        return (
+                            <Link
+                                key={item.label}
+                                href={item.href}
+                                aria-current={active ? 'page' : undefined}
+                                className={`relative py-2 text-[16px] transition-colors duration-300 ${active
+                                        ? 'font-medium text-[#19434A]'
+                                        : 'text-gray-800 hover:text-[#19434A]'
+                                    }`}
+                            >
+                                <span>{item.label}</span>
+                            </Link>
+                        );
+                    })}
+
+                    <span
+                        className={`pointer-events-none absolute bottom-0 h-[2px] rounded-full bg-[#19434A]
+            transition-[left,width,opacity] duration-500 ease-in-out
+            ${indicator.visible ? 'opacity-100' : 'opacity-0'}
+        `}
+                        style={{
+                            left: indicator.left,
+                            width: indicator.width,
+                        }}
+                    />
                 </div>
 
                 <button
@@ -88,8 +145,8 @@ export default function Navbar() {
                                 href={item.href}
                                 onClick={() => setIsOpen(false)}
                                 className={`text-sm ${isActive(item.href)
-                                        ? 'font-medium text-[#19434A]'
-                                        : 'text-gray-700'
+                                    ? 'font-medium text-[#19434A]'
+                                    : 'text-gray-700'
                                     }`}
                             >
                                 {item.label}

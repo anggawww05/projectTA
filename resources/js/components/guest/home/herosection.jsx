@@ -1,6 +1,6 @@
 export default function HeroSection() {
     return (
-        <section className="relative w-full aspect-1920/900 bg-center bg-cover"
+        <section className="relative w-full aspect-1920/900 bg-center bg-cover "
             style={{ backgroundImage: "url('/images/bg-hero.png')", }}
         >
             <div className="mx-auto max-w-7xl px-8 pt-36 flex flex-col">
