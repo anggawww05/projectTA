@@ -12,8 +12,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->decimal('threshold', 5, 2);
-            $table->timestamps('created_at');
-            $table->timestamps('updated_at');
+            $table->timestamps();
         });
     }
 

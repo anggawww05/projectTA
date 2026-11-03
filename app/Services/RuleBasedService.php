@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Category;
 use App\Models\Drone;
+use InvalidArgumentException;
 
 class RuleBasedService
 {
@@ -11,12 +12,15 @@ class RuleBasedService
 
     public function calculate(int $categoryId)
     {
-        $category = Category::findOrFail($categoryId);
+        Category::findOrFail($categoryId);
+
+        if (!in_array($categoryId, [1, 2, 3, 4], true)) {
+            throw new InvalidArgumentException('Kategori belum memiliki aturan.');
+        }
 
         $alternativedata = Drone::all();
 
         $results = [];
-
 
         foreach ($alternativedata as $data) {
             $score = 0;
@@ -61,7 +65,7 @@ class RuleBasedService
                         $score += 3;
                     }
 
-                    if ($data->flight_time <= 30) {
+                    if ($data->flight_time >= 30) {
                         $score += 2;
                     }
 
@@ -69,23 +73,38 @@ class RuleBasedService
 
                 case 3: //professional
 
-                    $maxscore = 14;
+                    $maxscore = 13  ;
 
-                    if ($data->camera_count >= 1) {
+                    if ($data->battery_count >= 1) {
                         $score += 4;
                     }
 
-                    if ($data->video_res >= 4) {
+                    if ($data->photo_res >= 4) {
                         $score += 4;
                     }
 
                     if ($data->picture_profile == true) {
-                        $score += 3;
+                        $score += 4;
                     }
 
-                    if ($data->flight_range <= 15) {
-                        $score += 2;
+                    if ($data->flight_range >= 15) {
+                        $score += 3;
                     }
+                    // if ($data->camera_count >= 1) {
+                    //     $score += 4;
+                    // }
+
+                    // if ($data->video_res >= 4) {
+                    //     $score += 4;
+                    // }
+
+                    // if ($data->picture_profile == true) {
+                    //     $score += 3;
+                    // }
+
+                    // if ($data->flight_range >= 15) {
+                    //     $score += 2;
+                    // }
 
                     break;
 
@@ -93,17 +112,17 @@ class RuleBasedService
 
                     $maxscore = 10;
 
-                    if ($data->max_speed >= 70) {
-                        $score += 4;
+                    if ($data->max_speed >= 12) {
+                        $score += 6;
                     }
 
                     if ($data->acro_mode == true) {
                         $score += 3;
                     }
 
-                    if ($data->mode_360 == true) {
-                        $score += 2;
-                    }
+                    // if ($data->mode_360 == true) {
+                    //     $score += 2;
+                    // }
 
                     if ($data->weight <= 500) {
                         $score += 1;
@@ -118,9 +137,10 @@ class RuleBasedService
 
             $results[] = [
                 'drone_id' => $data->id,
-                'brand' => $data->brand,
-                'model' => $data->model,
-                'package_name' => $data->package_name,
+                'name' => $data->name,
+                'price' => $data->price,
+                // 'model' => $data->model,
+                // 'package_name' => $data->package_name,
                 'score' => $score,
                 'max_score' => $maxscore,
                 'percentage' => $percentage,

@@ -4,7 +4,7 @@ import Tabel from "../../components/guest/recommendation/tabel";
 
 
 
-export default function Recommendation() {
+export default function Recommendation({ categories }) {
 
     return (
         <GuestLayout>
@@ -32,7 +32,7 @@ export default function Recommendation() {
 
                     </div>
 
-                    <Tabel />
+                    <Tabel categories={categories}/>
 
                 </div>
 

@@ -11,11 +11,10 @@ return new class extends Migration
         Schema::create('criteria', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('attribute');
+            // $table->string('attribute');
             $table->string('type');
             $table->integer('weight');
-            $table->timestamps('created_at');
-            $table->timestamps('updated_at');
+            $table->timestamps();
         });
     }
 

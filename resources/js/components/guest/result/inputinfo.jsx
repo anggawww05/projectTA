@@ -1,7 +1,10 @@
 import { Boxes, Wallet } from 'lucide-react';
 import Button from '../universal/button';
 
-export default function InputInfo() {
+export default function InputInfo({
+    category,
+    price,
+}) {
     return (
         <section className="w-full p-4 border border-gray-300 mt-4 rounded-xl">
             <div className="flex justify-between">
@@ -11,7 +14,7 @@ export default function InputInfo() {
                     </div>
                     <div className="flex flex-col">
                         <h1 className="text-md">Kategori Penggunaan</h1>
-                        <p className="text-xl font-semibold">Professional</p>
+                        <p className="text-xl font-semibold">{category}</p>
                     </div>
                 </div>
                 <div className="flex items-center gap-3">
@@ -20,7 +23,7 @@ export default function InputInfo() {
                     </div>
                     <div className="flex flex-col">
                         <h1 className="text-md">Biaya Maksimum</h1>
-                        <p className="text-xl font-semibold">Rp. 20.000.000,00</p>
+                        <p className="text-xl font-semibold">{price}</p>
                     </div>
                 </div>
                 <div className="flex justify-center">

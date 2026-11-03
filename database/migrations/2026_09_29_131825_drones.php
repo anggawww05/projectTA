@@ -10,26 +10,25 @@ return new class extends Migration
     {
         Schema::create('drones', function (Blueprint $table) {
             $table->id();
-            $table->string('brand');
-            $table->string('model');
+            // $table->string('brand');
+            $table->string('name');
             $table->text('description')->nullable();
             $table->string('image')->nullable();
-            $table->int('weight');
-            $table->int('photo_res');
-            $table->int('video_res');
-            $table->int('flight_time');
-            $table->int('flight_range');
-            $table->int('max_speed');
-            $table->int('production_year');
+            $table->integer('weight');
+            $table->integer('photo_res');
+            // $table->integer('video_res');
+            // $table->integer('flight_time');
+            $table->integer('flight_range');
+            $table->integer('max_speed');
+            $table->integer('production_year');
             $table->boolean('active_track');
             $table->boolean('picture_profile');
-            $table->boolean('acro_mode');
-            $table->boolean('mode_360');
-            $table->timestamps('created_at');
-            $table->timestamps('updated_at');
-            $table->string('package_name');
+            $table->boolean('manual_mode');
+            // $table->boolean('mode_360');
+            $table->timestamps();
+            // $table->string('package_name');
             $table->string('price');
-            $table->int('battery_count');
+            $table->integer('battery_count');
         });
     }
 

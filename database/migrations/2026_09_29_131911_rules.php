@@ -13,10 +13,9 @@ return new class extends Migration
             $table->foreignId('category_id')->constrained('drones')->onDelete('cascade');
             $table->string('attribute');
             $table->string('operator');
-            $table->int('value');
-            $table->int('score');
-            $table->timestamps('created_at');
-            $table->timestamps('updated_at');
+            $table->integer('value');
+            $table->integer('score');
+            $table->timestamps();
         });
     }
 

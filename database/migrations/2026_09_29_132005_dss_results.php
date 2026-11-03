@@ -11,13 +11,12 @@ return new class extends Migration
         Schema::create('dss_results', function (Blueprint $table) {
             $table->id();
             $table->foreignId('recommendation_id')->constrained('dss_recommendation')->onDelete('cascade');
-            $table->foreignId('drone_package_id')->constrained('drone_packages')->onDelete('cascade');
+            // $table->foreignId('drone_package_id')->constrained('drone_packages')->onDelete('cascade');
             $table->string('rule_score');
             $table->string('marcos_score');
-            $table->int('passed_threshold');
-            $table->int('rank');
-            $table->timestamps('created_at');
-            $table->timestamps('updated_at');
+            $table->integer('passed_threshold');
+            $table->integer('rank');
+            $table->timestamps();
         });
     }
 
