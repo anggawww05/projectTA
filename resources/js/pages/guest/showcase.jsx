@@ -7,8 +7,22 @@ import Pagination from "../../components/guest/showcase/pagination";
 
 
 
-export default function Showcase() {
+export default function Showcase({ drones = [] }) {
     const [currentPage, setCurrentPage] = useState(1);
+
+    const currentResults = drones.slice((currentPage - 1) * 8, currentPage * 8);
+
+    const formatRupiah = (price) => {
+        if (price === null || price === undefined) {
+            return "Harga tidak tersedia";
+        }
+
+        return new Intl.NumberFormat("id-ID", {
+            style: "currency",
+            currency: "IDR",
+            maximumFractionDigits: 0,
+        }).format(Number(price));
+    };
 
     return (
         <GuestLayout>
@@ -38,18 +52,27 @@ export default function Showcase() {
                     </div>
 
                     <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-                        {Array.from({ length: 8 }, (_, index) => (
-                            <Card
-                                key={index}
-                                title="DJI Lito X1 Drone Fly More Combo"
-                                subheadline="Rp. 12.000.000"
-                            />
-                        ))}
+                        {currentResults.length > 0 ? (
+                            currentResults.map((drone, index) => (
+                                <Card
+                                    key={drone.drone_id}
+                                    title={drone.name}
+                                    subheadline={formatRupiah(drone.price)}
+                                // percentage={drone.marcos_score_percentage}
+                                />
+                            ))
+                        ) : (
+                            <div className="rounded-xl border border-gray-300 bg-white p-8 text-center">
+                                <p className="text-gray-600">
+                                    Tidak ada alternatif drone.
+                                </p>
+                            </div>
+                        )}
                     </div>
                 </div>
 
                 <div className="mt-12">
-                    <Pagination currentPage={currentPage} totalPages={7} onPageChange={setCurrentPage}/>
+                    <Pagination currentPage={currentPage} totalPages={7} onPageChange={setCurrentPage} />
 
                 </div>
 

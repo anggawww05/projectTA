@@ -10,7 +10,7 @@ use Inertia\Inertia;
 
 class RecommendationController extends Controller
 {
-    public function index(Request $request, FilterService $filterService)
+    public function index()
     {
         return Inertia::render('guest/recommendation', [
             'categories' => Category::select('id', 'name')->get(),

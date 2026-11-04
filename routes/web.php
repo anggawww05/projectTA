@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\RecommendationController;
+use App\Http\Controllers\ShowcaseController;
 
 // Route::inertia('/', 'welcome')->name('home');
 
@@ -10,9 +11,9 @@ Route::get('/', function () {
     return Inertia::render('guest/welcome');
 });
 
-Route::get('/showcase', function () {
-    return Inertia::render('guest/showcase');
-})->name('showcase');
+Route::get('/showcase', [
+    ShowcaseController::class, 'index'
+])->name('showcase');
 
 Route::get('/recommendation', [
     RecommendationController::class, 'index'
